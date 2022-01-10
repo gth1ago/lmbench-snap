@@ -1,0 +1,39 @@
+name: lmbench-snap
+version: '0.1'
+summary: lmbench test suit
+description: |
+  Snap of the lmbench program, having a series of micro 
+  benchmarks designed to measure the basic operating 
+  system and hardware system metrics.
+
+grade: devel
+confinement: devmode
+base: core20        
+
+architectures:
+  - build-on: amd64
+  - build-on: i386
+  - build-on: arm64
+
+#apps:
+#  lmbench-snap:
+#   command: make rerun -C /usr/lmbench
+
+
+parts:
+  lmbench-snap:
+    source: .
+    plugin: nil
+    #make-parameters: ["build"]
+    stage-packages:
+      - libc6-dev
+      - libc6
+      - gcc
+      - perl
+      - build-essential
+    override-build: |
+      snapcraftctl build
+      mkdir -p $SNAPCRAFT_PART_INSTALL/usr/
+      cp -r lmbench $SNAPCRAFT_PART_INSTALL/usr/
+      cd $SNAPCRAFT_PART_INSTALL/usr/lmbench
+      make build
