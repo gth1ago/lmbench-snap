@@ -8,4 +8,4 @@ cd /snap/lmbench-snap/current/opt/lmbench
 make ...
 
 
-# create dir in /home/$USER/ but not continues..
+- create dir in /home/$USER/ but not continues..
