@@ -12,28 +12,43 @@ base: core20
 
 architectures:
   - build-on: amd64
-  - build-on: i386
   - build-on: arm64
 
 #apps:
 #  lmbench-snap:
-#   command: make rerun -C /usr/lmbench
-
+#   command: $SNAP/usr/bin/lmbench-run
+#   environment: 
+#     PATH: $SNAP/usr/:$PATH
 
 parts:
   lmbench-snap:
     source: .
+    #http://archive.ubuntu.com/ubuntu/pool/multiverse/l/lmbench/lmbench_3.0-a9+debian.1-3_amd64.deb 
+    # http://ftp.univ-pau.fr/linux/mirrors/debian/pool/non-free/l/lmbench/lmbench_3.0-a9+debian.1.orig.tar.gz
     plugin: nil
-    #make-parameters: ["build"]
-    stage-packages:
-      - libc6-dev
-      - libc6
-      - gcc
-      - perl
-      - build-essential
+    #source-type: deb
     override-build: |
+      mkdir -p $SNAPCRAFT_PART_INSTALL/opt
+      #mkdir -p $SNAPCRAFT_PART_INSTALL/usr/include
+      #mkdir -p $SNAPCRAFT_PART_INSTALL/var/lib
+      
+      cp -r lmbench $SNAPCRAFT_PART_INSTALL/opt/  
+      #cd $SNAPCRAFT_PART_INSTALL/opt/lmbench
+      #make build
+
       snapcraftctl build
-      mkdir -p $SNAPCRAFT_PART_INSTALL/usr/
-      cp -r lmbench $SNAPCRAFT_PART_INSTALL/usr/
-      cd $SNAPCRAFT_PART_INSTALL/usr/lmbench
-      make build
+    build-packages:
+     - libc6-dev
+     - libc-dev
+     - libc6
+     - gcc
+     - perl
+     - build-essential
+    stage-packages:
+     - libc6-dev
+     - libc-dev
+     - libc6
+     - gcc
+     - perl
+     - build-essential
+     - make
