@@ -23,19 +23,14 @@ architectures:
 parts:
   lmbench-snap:
     source: .
-    #http://archive.ubuntu.com/ubuntu/pool/multiverse/l/lmbench/lmbench_3.0-a9+debian.1-3_amd64.deb 
-    # http://ftp.univ-pau.fr/linux/mirrors/debian/pool/non-free/l/lmbench/lmbench_3.0-a9+debian.1.orig.tar.gz
     plugin: nil
     #source-type: deb
     override-build: |
       mkdir -p $SNAPCRAFT_PART_INSTALL/opt
       #mkdir -p $SNAPCRAFT_PART_INSTALL/usr/include
-      #mkdir -p $SNAPCRAFT_PART_INSTALL/var/lib
-      
       cp -r lmbench $SNAPCRAFT_PART_INSTALL/opt/  
-      #cd $SNAPCRAFT_PART_INSTALL/opt/lmbench
-      #make build
-
+      cp utils/script.sh $SNAPCRAFT_PART_INSTALL/opt/
+      cp utils/info.md $SNAPCRAFT_PART_INSTALL/opt/
       snapcraftctl build
     build-packages:
      - libc6-dev
