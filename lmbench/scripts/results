@@ -4,7 +4,7 @@
 
 OS=`../scripts/os`
 CONFIG=`../scripts/config`
-RESULTS=/home/$USER/TestePasta
+RESULTS=/home/$USER/results
 BASE=$RESULTS/`uname -n`
 EXT=0
 
