@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir -p /home/gth1ago/results
+mkdir -p /home/$USER/results
 export PATH=/snap/lmbench-snap/current/usr/bin:$PATH
 cd /snap/lmbench-snap/current/opt/lmbench/src
 
